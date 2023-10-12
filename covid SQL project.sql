@@ -124,7 +124,7 @@ and d.date=v.date
 --where d.continent is not null
 select *,(RollingPeopleVaccinated/population)*100 as populationvcaccinatedpercentage from #Percentpopulationvaccinated
 
---creating view to use later
+--creating view to use later visuvalzation
 create view Percentpopulationvaccinated as
 select d.continent,d.location,d.date,d.population, v.new_vaccinations,sum(convert(bigint,v.new_vaccinations)) over(partition by d.location order by d.location, d.date) as RollingPeopleVaccinated  from CovidDeaths d
 join covidvaccine v
